@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 435373165}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: origin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1330,7 +1330,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435373163}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.000000007450581, w: 1}
   m_LocalPosition: {x: -150, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3820,6 +3820,7 @@ MonoBehaviour:
   enemy: {fileID: 1131870754492908, guid: 028b7d853a7752f43bbadf1faec4a8cd, type: 3}
   numberOfEnemies: 20
   spawnLocation: {fileID: 435373163}
+  resourceObjects: []
   drones: []
   scouts: []
   maxScouts: 4
@@ -6996,43 +6997,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -424
+      value: -425
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 160.8
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 579.6
+      value: 580
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.58981985
+      value: 0.5870962
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.68648714
+      value: -0.68599457
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.1475175
+      value: -0.1512438
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.39885658
+      value: -0.4023119
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -68.046005
+      value: -68
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 87.86201
+      value: 88
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -134.212
+      value: -135
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82280d50c09b6f6438ca345f0010f5cd, type: 3}

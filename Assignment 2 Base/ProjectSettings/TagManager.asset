@@ -9,6 +9,7 @@ TagManager:
   - AudioManager
   - Boid
   - Environment
+  - origin
   layers:
   - Default
   - TransparentFX

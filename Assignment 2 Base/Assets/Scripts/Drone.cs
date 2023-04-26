@@ -30,6 +30,19 @@ public class Drone : Enemy {
     public GameObject motherShip;
     public Vector3 scoutPosition;
 
+    //The orgin that keep all the dones idle
+    public GameObject origin;
+
+    //Prey & Predator variables added
+    private Vector3 tarVel;
+    private Vector3 tarPrevPos;
+    private Vector3 attackPos;
+    private Vector3 fleePos;
+    private float distanceRatio = 0.05f;
+    
+    //Drone Utility Variable
+    private float attackOrFlee;
+
     // varibales added
     private float scoutTimer;
     private float detectTimer;
@@ -43,7 +56,9 @@ public class Drone : Enemy {
     {
         Idle,
         Scouting,
-        Foraging
+        Foraging,
+        Attacking,
+        Fleeing
     }
 
     public DroneBehaviours droneBehaviour;
@@ -57,21 +72,62 @@ public class Drone : Enemy {
 
         motherShip = gameManager.alienMothership;
         scoutPosition = motherShip.transform.position;
+        
+        // set an origin to slove the bug
+        origin = GameObject.FindGameObjectWithTag("origin").gameObject;
+        transform.position=origin.transform.position;
+
+        // set the state to be idle 
+        droneBehaviour=DroneBehaviours.Idle;
     }
 
     // Update is called once per frame
     void Update() {
 
         //Move towards valid targets
-        if (target)
+        /*if (target)
+        {
             MoveTowardsTarget(target.transform.position);
+        }
+        */
 
         //Acquire player if spawned in
         if (gameManager.gameStarted)
+        {
             target = gameManager.playerDreadnaught;
+
+            // Heuristic function here
+            attackOrFlee = health * Friends();
+
+            if (attackOrFlee >= 1000)
+            {
+                droneBehaviour = DroneBehaviours.Attacking;
+            }
+            else if (attackOrFlee < 1000) 
+            {
+                droneBehaviour = DroneBehaviours.Fleeing;
+            }
+               
+            //droneBehaviour = DroneBehaviours.Attacking;
+        }
 
         //Boid cohesion/segregation
         BoidBehaviour();
+    }
+
+    //Calculate number of Friendly Units in targetRadius
+    private int Friends()
+    {
+        int clusterStrength = 0;
+        for (int i = 0; i < gameManager.enemyList.Length; i++)
+        {
+            if (Vector3.Distance(transform.position, gameManager.enemyList[i].transform.position) <
+            targetRadius)
+            {
+                clusterStrength++;
+            }
+        }
+        return clusterStrength;
     }
 
     private void MoveTowardsTarget(Vector3 targetPos)
@@ -136,9 +192,19 @@ public class Drone : Enemy {
         //Drone Behaviours - State Switching
         switch (droneBehaviour)
         {
+            case DroneBehaviours.Idle:
+                Idle();
+                break;
             case DroneBehaviours.Scouting:
                 Scouting();
                 break;
+            case DroneBehaviours.Attacking:
+                Attacking();
+                break;
+            case DroneBehaviours.Fleeing:
+                Fleeing();
+                break;
+
         }
 
     }
@@ -192,6 +258,61 @@ public class Drone : Enemy {
                 droneBehaviour = DroneBehaviours.Idle;
             }
         }
+    }
+
+    //keeps all the dones stay round the mothership
+    private void Idle() 
+    {
+        MoveTowardsTarget(origin.transform.position);
+    }
+
+    //Drone FSM Behaviour - Attacking
+    private void Attacking()
+    {
+        //Calculate target's velocity (without using RB)
+        tarVel = (target.transform.position - tarPrevPos) / Time.deltaTime;
+        tarPrevPos = target.transform.position;
+
+        //Calculate intercept attack position (p = t + r * d * v)
+        attackPos = target.transform.position + distanceRatio * Vector3.Distance(transform.position,
+        target.transform.position) * tarVel;
+
+        attackPos.y = attackPos.y + 10;
+        Debug.DrawLine(transform.position, attackPos, Color.red);
+
+        // Not in range of intercept vector - move into position
+        if (Vector3.Distance(transform.position, attackPos) > targetRadius)
+            MoveTowardsTarget(attackPos);
+        else
+        {
+            //Look at target - Lerp Towards target
+            targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            adjRotSpeed = Mathf.Min(rotationSpeed * Time.deltaTime, 1);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, adjRotSpeed);
+            //Fire Weapons at target
+            //...
+            
+        }
+    }
+
+    private void Fleeing()
+    {
+        //Calculate flee position
+        fleePos = target.transform.position+ distanceRatio * Vector3.Distance(transform.position, target.transform.position) * rb.velocity;
+
+        Debug.DrawLine(transform.position, fleePos, Color.white);
+        //If not in range of flee position, move towards it
+        if (Vector3.Distance(transform.position, fleePos) < targetRadius)
+        {
+            MoveTowardsTarget(fleePos);
+        }
+        else 
+        {
+            //Look at target - Lerp back to the MotherShip
+            MoveTowardsTarget(origin.transform.position);
+         
+        }
+
     }
     private GameObject DetectNewResources()
     {
