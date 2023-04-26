@@ -99,7 +99,7 @@ public class Drone : Enemy {
             // Heuristic function here
             attackOrFlee = health * Friends();
 
-            if (attackOrFlee >= 1000)
+            /*if (attackOrFlee >= 1000)
             {
                 droneBehaviour = DroneBehaviours.Attacking;
             }
@@ -107,6 +107,7 @@ public class Drone : Enemy {
             {
                 droneBehaviour = DroneBehaviours.Fleeing;
             }
+            */
                
             //droneBehaviour = DroneBehaviours.Attacking;
         }
@@ -298,19 +299,23 @@ public class Drone : Enemy {
     private void Fleeing()
     {
         //Calculate flee position
-        fleePos = target.transform.position+ distanceRatio * Vector3.Distance(transform.position, target.transform.position) * rb.velocity;
+        fleePos = transform.position + distanceRatio * Vector3.Distance(transform.position, target.transform.position) * rb.velocity;
 
         Debug.DrawLine(transform.position, fleePos, Color.white);
         //If not in range of flee position, move towards it
-        if (Vector3.Distance(transform.position, fleePos) < targetRadius)
+        if (Vector3.Distance(transform.position, fleePos) > targetRadius)
         {
             MoveTowardsTarget(fleePos);
         }
         else 
         {
-            //Look at target - Lerp back to the MotherShip
-            MoveTowardsTarget(origin.transform.position);
-         
+            //Look at target - Lerp Towards target
+            targetRotation = Quaternion.LookRotation(origin.transform.position - transform.position);
+            adjRotSpeed = Mathf.Min(rotationSpeed * Time.deltaTime, 1);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, adjRotSpeed);
+
+            //MoveTowardsTarget(origin.transform.position);
+
         }
 
     }
