@@ -302,21 +302,23 @@ public class Drone : Enemy {
         fleePos = transform.position + distanceRatio * Vector3.Distance(transform.position, target.transform.position) * rb.velocity;
 
         Debug.DrawLine(transform.position, fleePos, Color.white);
-        //If not in range of flee position, move towards it
-        if (Vector3.Distance(transform.position, fleePos) > targetRadius)
+
+        //If not in range of flee position and drone is in the range of the player, move towards it
+        if (Vector3.Distance(transform.position, fleePos) > targetRadius && Vector3.Distance(transform.position, target.transform.position) < targetRadius)
         {
             MoveTowardsTarget(fleePos);
         }
-        else 
+        // Head back to the MotherShip
+        else
         {
-            //Look at target - Lerp Towards target
-            targetRotation = Quaternion.LookRotation(origin.transform.position - transform.position);
-            adjRotSpeed = Mathf.Min(rotationSpeed * Time.deltaTime, 1);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, adjRotSpeed);
-
-            //MoveTowardsTarget(origin.transform.position);
-
+            MoveTowardsTarget(origin.transform.position);
+            // check the distance between the drone and mothership if drones are around it Resupply at the mothership.
+            if (Vector3.Distance(transform.position, origin.transform.position) < targetRadius)
+            {
+                droneBehaviour = DroneBehaviours.Idle;
+            }
         }
+      
 
     }
     private GameObject DetectNewResources()
