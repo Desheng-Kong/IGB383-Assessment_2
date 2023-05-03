@@ -3818,7 +3818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1131870754492908, guid: 028b7d853a7752f43bbadf1faec4a8cd, type: 3}
-  numberOfEnemies: 20
+  numberOfEnemies: 30
   spawnLocation: {fileID: 435373163}
   resourceObjects: []
   drones: []

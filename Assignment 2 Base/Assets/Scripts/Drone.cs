@@ -84,12 +84,6 @@ public class Drone : Enemy {
     // Update is called once per frame
     void Update() {
 
-        //Move towards valid targets
-        /*if (target)
-        {
-            MoveTowardsTarget(target.transform.position);
-        }
-        */
 
         //Acquire player if spawned in
         if (gameManager.gameStarted)
@@ -99,7 +93,7 @@ public class Drone : Enemy {
             // Heuristic function here
             attackOrFlee = health * Friends();
 
-            /*if (attackOrFlee >= 1000)
+            if (attackOrFlee >= 1000)
             {
                 droneBehaviour = DroneBehaviours.Attacking;
             }
@@ -107,9 +101,7 @@ public class Drone : Enemy {
             {
                 droneBehaviour = DroneBehaviours.Fleeing;
             }
-            */
-               
-            //droneBehaviour = DroneBehaviours.Attacking;
+            
         }
 
         //Boid cohesion/segregation
@@ -318,8 +310,6 @@ public class Drone : Enemy {
                 droneBehaviour = DroneBehaviours.Idle;
             }
         }
-      
-
     }
     private GameObject DetectNewResources()
     {

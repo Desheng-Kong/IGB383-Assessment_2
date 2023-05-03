@@ -5,7 +5,7 @@ using System.Collections;
 public class Mothership : MonoBehaviour {
 
     public GameObject enemy;
-    public int numberOfEnemies = 20;
+    public int numberOfEnemies = 30;
 
     public GameObject spawnLocation;
     public List<GameObject> resourceObjects = new List<GameObject>();
