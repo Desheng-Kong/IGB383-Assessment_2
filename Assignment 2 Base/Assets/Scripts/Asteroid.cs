@@ -16,6 +16,9 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (resource == 0) 
+        {
+            resource = Random.Range(20, 120);
+        }
     }
 }

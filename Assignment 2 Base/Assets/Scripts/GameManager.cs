@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	
 		enemyList = GameObject.FindGameObjectsWithTag ("Enemy");
 
-
+    
         //Check to see if Game Started
         if(Input.GetKeyDown("space") && gameStarted == false) {
             gameStarted = true;

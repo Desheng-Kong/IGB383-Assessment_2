@@ -2374,7 +2374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 417284, guid: 7c7d9ba83b627a8439af1bc6c103b3fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 63.75586
+      value: 63.75
       objectReference: {fileID: 0}
     - target: {fileID: 417284, guid: 7c7d9ba83b627a8439af1bc6c103b3fb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2872,7 +2872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 416822, guid: 9cdb9c4752ac6224bb1407ef18553282, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 175.75586
+      value: 175.75
       objectReference: {fileID: 0}
     - target: {fileID: 416822, guid: 9cdb9c4752ac6224bb1407ef18553282, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3458,7 +3458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461498, guid: 66c1badfe4e3ddb4fa74d6acd932ad4c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.244141
+      value: -10.24
       objectReference: {fileID: 0}
     - target: {fileID: 461498, guid: 66c1badfe4e3ddb4fa74d6acd932ad4c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3818,12 +3818,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1131870754492908, guid: 028b7d853a7752f43bbadf1faec4a8cd, type: 3}
-  numberOfEnemies: 30
+  numberOfEnemies: 20
   spawnLocation: {fileID: 435373163}
   resourceObjects: []
   drones: []
   scouts: []
+  foragers: []
+  elite_foragers: []
   maxScouts: 4
+  maxForagers: 3
+  maxEliteForagers: 2
 --- !u!1 &1125849724 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 125034, guid: 7c7d9ba83b627a8439af1bc6c103b3fb,
@@ -5717,7 +5721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434614, guid: ad12a4d9fd50d3c4e84d3415f2d85ed5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -74.24414
+      value: -74.24
       objectReference: {fileID: 0}
     - target: {fileID: 434614, guid: ad12a4d9fd50d3c4e84d3415f2d85ed5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7101,7 +7105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079561771}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -436.20895, y: 0, z: 110.455765}
+  m_LocalPosition: {x: -436.20895, y: 160.9, z: 110.455765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
